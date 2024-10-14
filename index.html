@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Portfolio with Toggle Switch</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      transition: background-color 0.3s, color 0.3s;
+      position: relative;
+    }
+    .coding-mode .background, .anime-mode .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      filter: blur(10px);
+      transition: opacity 0.3s ease;
+    }
+    .coding-mode .background {
+      background-image: url('https://i.pinimg.com/736x/4e/4e/26/4e4e26cae6106d9c7dd6333083599553--background-images-my-works.jpg');
+      opacity: 1;
+    }
+    .anime-mode .background {
+      background-image: url('https://tse4.mm.bing.net/th?id=OIP.BXsxvnDMc7nQyCkgX5DgLwHaEK&pid=Api&P=0&h=180');
+      opacity: 1;
+    }
+    .container {
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent */
+      z-index: 1;
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: -75px; /* Center the image */
+      border: 5px solid white;
+    }
+    .name {
+      font-size: 2em;
+      margin: 20px 0;
+    }
+    .description {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+    
+    /* New toggle button style */
+    #darkmode-toggle {
+      display: none;
+    }
+
+    label {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 30px;
+      background: #ebebeb;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      transition: 0.3s;
+    }
+
+    label:after {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: linear-gradient(180deg, #ffcc89, #d8860b);
+      border-radius: 50%;
+      position: absolute;
+      left: 3px;
+      transition: 0.4s;
+    }
+
+    svg {
+      position: absolute;
+      width: 18px;
+      top: 6px;
+      transition: 0.3s;
+    }
+
+    svg.sun {
+      left: 6px;
+      fill: #fff;
+    }
+
+    svg.moon {
+      right: 6px;
+      fill: #7e7e7e;
+    }
+
+    #darkmode-toggle:checked + label {
+      background: #242424;
+    }
+
+    #darkmode-toggle:checked + label:after {
+      left: 33px;
+      background: linear-gradient(180deg, #777, #3a3a3a);
+    }
+
+    #darkmode-toggle:checked + label .sun {
+      fill: #7e7e7e;
+    }
+
+    #darkmode-toggle:checked + label .moon {
+      fill: #fff;
+    }
+
+    .mode-label {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body class="coding-mode">
+  <div class="background"></div> <!-- Blurred background -->
+  <div class="container">
+    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+    <div class="name">Your Name</div>
+    <div class="description">A passionate developer who loves to code and watch anime.</div>
+    <div class="mode-label" id="modeLabel">Coding Mode</div>
+  </div>
+
+  <!-- Toggle Switch -->
+  <input type="checkbox" id="darkmode-toggle" />
+  <label for="darkmode-toggle">
+    <svg version="1.1" class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+      <!-- Sun SVG content -->
+      <rect x="240" width="16" height="72" />
+      <!-- More SVG elements -->
+    </svg>
+    <svg version="1.1" class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.739 49.739">
+      <!-- Moon SVG content -->
+      <path d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268
+             c-1.479,5.459-0.899,11.25,1.633,16.306c2.75,5.493,7.476,9.587,13.305,11.526c5.831,1.939,12.065,1.492,17.559-1.258v0
+             c0.25-0.125,0.492-0.258,0.734-0.391l2.061-1.13l-0.585,2.252c-1.863,6.873-6.577,12.639-12.933,15.822
+             C32.639,48.039,28.825,48.888,25.068,48.889z"/>
+    </svg>
+  </label>
+
+  <script>
+    const modeSwitch = document.getElementById('darkmode-toggle');
+    const modeLabel = document.getElementById('modeLabel');
+
+    modeSwitch.addEventListener('change', () => {
+      document.body.classList.toggle('anime-mode');
+      if (document.body.classList.contains('anime-mode')) {
+        modeLabel.textContent = 'Anime Mode';
+      } else {
+        modeLabel.textContent = 'Coding Mode';
+      }
+    });
+  </script>
+</body>
+</html>
