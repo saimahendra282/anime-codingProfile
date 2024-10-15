@@ -13,8 +13,8 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
-      transition: background-color 0.3s, color 0.3s;
       position: relative;
+      transition: background-color 0.3s, color 0.3s;
     }
     .coding-mode .background, .anime-mode .background {
       position: absolute;
@@ -33,42 +33,61 @@
       opacity: 1;
     }
     .anime-mode .background {
-      background-image: url('https://tse4.mm.bing.net/th?id=OIP.BXsxvnDMc7nQyCkgX5DgLwHaEK&pid=Api&P=0&h=180');
+      background-image: url('https://tse4.mm.bing.net/th?id=OIP.OSTx96i8mn4S0RHAtr1_ggHaEJ&pid=Api&P=0&h=180');
       opacity: 1;
     }
     .container {
       text-align: center;
       max-width: 400px;
+      width: 90%; /* Make container responsive */
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent */
+      background-color: rgba(255, 255, 255, 0.85); /* Default background */
       z-index: 1;
+      position: relative; /* Relative positioning for toggle button */
+      transition: background-color 0.3s; /* Smooth transition for background color */
+    }
+    .container.anime {
+      background-color: rgba(0, 0, 0, 0.85); /* Black background for anime mode */
+      color: white; /* Set text color to white for visibility */
     }
     .profile-pic {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
-      margin-top: -75px; /* Center the image */
+      margin-top: -75px;
       border: 5px solid white;
     }
     .name {
       font-size: 2em;
-      margin: 20px 0;
+      margin: 10px 0;
     }
-    .description {
+    .quote {
       font-size: 1.1em;
-      margin-bottom: 20px;
+      font-style: italic;
+      margin: 10px 0;
+      color: #555;
     }
-    
-    /* New toggle button style */
+    .skills {
+      margin: 20px 0;
+      font-size: 1em;
+    }
+    .skills span {
+      display: inline-block;
+      margin: 5px 10px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    /* Toggle button styles */
     #darkmode-toggle {
       display: none;
     }
-
     label {
-      position: fixed;
+      position: absolute; /* Position inside the container */
       top: 20px;
       right: 20px;
       width: 60px;
@@ -82,7 +101,6 @@
       z-index: 2;
       transition: 0.3s;
     }
-
     label:after {
       content: "";
       width: 24px;
@@ -93,83 +111,127 @@
       left: 3px;
       transition: 0.4s;
     }
-
     svg {
       position: absolute;
       width: 18px;
       top: 6px;
       transition: 0.3s;
     }
-
     svg.sun {
       left: 6px;
       fill: #fff;
     }
-
     svg.moon {
       right: 6px;
       fill: #7e7e7e;
     }
-
     #darkmode-toggle:checked + label {
       background: #242424;
     }
-
     #darkmode-toggle:checked + label:after {
       left: 33px;
       background: linear-gradient(180deg, #777, #3a3a3a);
     }
-
     #darkmode-toggle:checked + label .sun {
       fill: #7e7e7e;
     }
-
     #darkmode-toggle:checked + label .moon {
       fill: #fff;
     }
-
     .mode-label {
       margin-top: 10px;
       font-size: 1.2em;
+      color: inherit; /* Inherit color from parent */
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 600px) {
+      .name {
+        font-size: 1.8em;
+      }
+      .quote {
+        font-size: 1em;
+      }
+      .skills {
+        font-size: 0.9em;
+      }
+      .skills span {
+        margin: 4px 8px;
+      }
+      label {
+        top: 15px;
+        right: 15px;
+      }
     }
   </style>
 </head>
 <body class="coding-mode">
-  <div class="background"></div> <!-- Blurred background -->
+  <div class="background"></div>
   <div class="container">
-    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
-    <div class="name">Your Name</div>
-    <div class="description">A passionate developer who loves to code and watch anime.</div>
+    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic" id="profilePic">
+    <div class="name" id="name">Your Coding Name</div>
+    <div class="quote" id="quote">"The best way to predict the future is to invent it."</div>
+    <div class="skills" id="skills">
+      <span>JavaScript</span>
+      <span>React</span>
+      <span>Node.js</span>
+      <span>CSS</span>
+    </div>
     <div class="mode-label" id="modeLabel">Coding Mode</div>
-  </div>
 
-  <!-- Toggle Switch -->
-  <input type="checkbox" id="darkmode-toggle" />
-  <label for="darkmode-toggle">
-    <svg version="1.1" class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
-      <!-- Sun SVG content -->
-      <rect x="240" width="16" height="72" />
-      <!-- More SVG elements -->
-    </svg>
-    <svg version="1.1" class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.739 49.739">
-      <!-- Moon SVG content -->
-      <path d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268
-             c-1.479,5.459-0.899,11.25,1.633,16.306c2.75,5.493,7.476,9.587,13.305,11.526c5.831,1.939,12.065,1.492,17.559-1.258v0
-             c0.25-0.125,0.492-0.258,0.734-0.391l2.061-1.13l-0.585,2.252c-1.863,6.873-6.577,12.639-12.933,15.822
-             C32.639,48.039,28.825,48.888,25.068,48.889z"/>
-    </svg>
-  </label>
+    <!-- Toggle Switch -->
+    <input type="checkbox" id="darkmode-toggle" />
+    <label for="darkmode-toggle">
+      <svg version="1.1" class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+        <rect x="240" width="16" height="72" />
+        <!-- More SVG elements -->
+      </svg>
+      <svg version="1.1" class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.739 49.739">
+        <path d="M25.068,48.889c-9.173,0-18.017-5.06-22.396-13.804C-3.373,23.008,1.164,8.467,13.003,1.979l2.061-1.129l-0.615,2.268
+               c-1.479,5.459-0.899,11.25,1.633,16.306c2.75,5.493,7.476,9.587,13.305,11.526c5.831,1.939,12.065,1.492,17.559-1.258v0
+               c0.25-0.125,0.492-0.258,0.734-0.391l2.061-1.13l-0.585,2.252c-1.863,6.873-6.577,12.639-12.933,15.822
+               C32.639,48.039,28.825,48.888,25.068,48.889z"/>
+      </svg>
+<!--        <img src="path/to/sai.svg" class="sun" alt="Sun Icon" />
+  <img src="path/to/sai-moon.svg" class="moon" alt="Moon Icon" /> -->
+    </label>
+  </div>
 
   <script>
     const modeSwitch = document.getElementById('darkmode-toggle');
     const modeLabel = document.getElementById('modeLabel');
+    const nameElement = document.getElementById('name');
+    const quoteElement = document.getElementById('quote');
+    const skillsElement = document.getElementById('skills');
+    const profilePic = document.getElementById('profilePic');
+    const container = document.querySelector('.container');
 
     modeSwitch.addEventListener('change', () => {
       document.body.classList.toggle('anime-mode');
+      container.classList.toggle('anime'); // Add this line to toggle the class for background color
+
       if (document.body.classList.contains('anime-mode')) {
         modeLabel.textContent = 'Anime Mode';
+        nameElement.textContent = 'Your Anime Name';
+        quoteElement.textContent = '"In every job that must be done, there is an element of fun."';
+        skillsElement.innerHTML = `
+          <span>Anime Watching</span>
+          <span>Drawing</span>
+          <span>Storytelling</span>
+          <span>Character Design</span>
+        `;
+        profilePic.src = 'https://tse1.mm.bing.net/th?id=OIP.MYwdjrgFU0JwL6ahVIdgZwHaH_&pid=Api&P=0&h=180'; 
       } else {
         modeLabel.textContent = 'Coding Mode';
+        nameElement.textContent = 'Your Coding Name';
+        quoteElement.textContent = '"The best way to predict the future is to invent it."';
+        skillsElement.innerHTML = `
+          <span>JavaScript</span>
+          <span>React</span>
+          <span>Node.js</span>
+          <span>CSS</span>
+        `;
+        profilePic.src = 'https://tse1.mm.bing.net/th?id=OIP.GHGGLYe7gDfZUzF_tElxiQHaHa&pid=Api&P=0&h=180'; // Change to your coding profile picture
       }
     });
   </script>
