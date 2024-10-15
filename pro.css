@@ -1,0 +1,140 @@
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .coding-mode .background, .anime-mode .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      filter: blur(10px);
+      transition: opacity 0.3s ease;
+    }
+    .coding-mode .background {
+      background-image: url('https://i.pinimg.com/736x/4e/4e/26/4e4e26cae6106d9c7dd6333083599553--background-images-my-works.jpg');
+      opacity: 1;
+    }
+    .anime-mode .background {
+      background-image: url('https://tse4.mm.bing.net/th?id=OIP.OSTx96i8mn4S0RHAtr1_ggHaEJ&pid=Api&P=0&h=180');
+      opacity: 1;
+    }
+    .container {
+      text-align: center;
+      max-width: 400px;
+      width: 90%; 
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.85); 
+      z-index: 1;
+      position: relative;
+      transition: background-color 0.3s;
+    }
+    .container.anime {
+      background-color: rgba(0, 0, 0, 0.85); 
+      color: white; 
+    }
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: -75px;
+      border: 5px solid white;
+    }
+    .name {
+      font-size: 2em;
+      margin: 10px 0;
+    }
+    .quote {
+      font-size: 1.1em;
+      font-style: italic;
+      margin: 10px 0;
+      color: #555;
+    }
+    #darkmode-toggle {
+      display: none;
+    }
+
+    label {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 60px;
+      height: 30px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center; 
+      cursor: pointer;
+      box-shadow: inset 0px 5px 10px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+      transition: 0.3s;
+      background: url('https://img.freepik.com/free-vector/hand-drawn-kitsune-illustration_23-2149364567.jpg?w=1060&t=st=1728971113~exp=1728971713~hmac=f49189926f9800132fd5959e69b190a304a1608e6a9b8704ebbf193c5836c07e');  
+      color: black; 
+      font-weight: bold; 
+    }
+
+    label:after {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: url('https://tse2.mm.bing.net/th/id/OIP.bxlLi5j-JbHBC1dHfs_oWQHaHa?rs=1&pid=ImgDetMain'); 
+      background-size: contain; 
+      background-repeat: no-repeat; 
+      border-radius: 50%;
+      position: absolute;
+      left: 3px;
+      transition: 0.4s;
+    }
+
+    #darkmode-toggle:checked + label {
+      background: url('https://tse2.mm.bing.net/th/id/OIP.bxlLi5j-JbHBC1dHfs_oWQHaHa?rs=1&pid=ImgDetMain');
+    }
+
+    #darkmode-toggle:checked + label:after {
+      left: 33px;
+      background: url('https://img.freepik.com/free-vector/hand-drawn-kitsune-illustration_23-2149364567.jpg?w=1060&t=st=1728971113~exp=1728971713~hmac=f49189926f9800132fd5959e69b190a304a1608e6a9b8704ebbf193c5836c07e'); /* Image for the toggle */
+      background-size: contain;
+      background-repeat: no-repeat; 
+    }
+
+    .project-section {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; 
+    }  
+
+    .project {
+      margin: 15px; 
+    }
+
+    .project img {
+      width: 50px;
+      height: 50px;
+      border-radius: 5px; 
+    }
+    @media (max-width: 600px) {
+      .name {
+        font-size: 1.8em;
+      }
+      .quote {
+        font-size: 1em;
+      }
+      label {
+        top: 15px;
+        right: 15px;
+      }
+    }
